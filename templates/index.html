@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IDP Dashboard - Intelligent Document Processing</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>📄 Intelligent Document Processing System</h1>
+    <p class="subtitle">Upload an invoice, contract, ID proof, or resume — the system will OCR it, extract key fields, and classify it automatically.</p>
+
+    <form action="/upload" method="post" enctype="multipart/form-data" class="upload-form">
+      <input type="file" name="document" accept=".png,.jpg,.jpeg,.pdf" required>
+      <button type="submit">Process Document</button>
+    </form>
+
+    <h2>Processed Documents</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Filename</th>
+          <th>Type</th>
+          <th>Vendor</th>
+          <th>Invoice #</th>
+          <th>Date</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for doc in documents %}
+        <tr>
+          <td>{{ doc[1] }}</td>
+          <td><span class="badge">{{ doc[2] }}</span></td>
+          <td>{{ doc[3] }}</td>
+          <td>{{ doc[4] }}</td>
+          <td>{{ doc[5] }}</td>
+          <td>{{ doc[6] }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6" class="empty">No documents processed yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
