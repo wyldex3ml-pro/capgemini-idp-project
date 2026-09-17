@@ -21,6 +21,7 @@ from database import init_db, save_document, get_all_documents
 app = Flask(__name__)
 UPLOAD_FOLDER = "uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 init_db()  # create the table if it doesn't exist yet
 
